@@ -1,0 +1,20 @@
+<!-- Aideen Byrne -->
+<?xml version="1.0" encoding="UTF-8"?>
+<library="library">
+	<technical_books>
+	<title>tech book 1</title>
+    <ISBN>123456789</ISBN>
+    <author>A Writer</author>
+	<title>tech book 2</title>
+    <ISBN>987654321</ISBN>
+    <author>AN Other Writer</author>
+	</technical_books>
+	<cookery_books>
+	<title>How to Cook</title>
+    <ISBN>159753468</ISBN>
+    <author>A Chef</author>
+	<title>How to Eat</title>
+    <ISBN>111111111</ISBN>
+    <author>AN Eater</author>
+</cookery_books>
+</library>
