@@ -46,11 +46,11 @@ def getALL():
 #curl "http://127.0.0.1:5000/vinyl/2"
 @app.route('/vinyl/<int:id>')
 def findById(id):
-    foundVinyls = list(filter(lambda v: v['id'] == id, vinyl))
-    if len(foundVinyls) == 0:
+    foundVinyl = list(filter(lambda v: v['id'] == id, vinyl))
+    if len(foundVinyl) == 0:
         return jsonify ({}), 204
 
-    return jsonify(foundVinyls[0])
+    return jsonify(foundVinyl[0])
 
 @app.route('/vinyl', methods=['POST'])
 def create():
@@ -69,15 +69,19 @@ def create():
     vinyl.append(vinyl)
     return jsonify(book)
 
+#curl -i -H "Content-Type: application/json" -X PUT http://127.0.0.1:5000/vinyl/1 -d "{\"Title\":\"X\"}"
 @app.route('/vinyl/<int:id>', methods=["PUT"])
 def update(id): 
-    foundVinyls = list(filter(lambda t: t['id'] == id, vinyl))
-    if (len(foundVinyls) == 0):
+    foundVinyl = list(filter(lambda t: t['id'] == id, vinyl))
+    if (len(foundVinyl) == 0):
         abort (404)
-    foundVinyl = foundVinyls[0]
+    foundVinyl = foundVinyl[0]
     if not request.json:
         abort (400)
     reqJson = request.json
+
+    if 'Price' in reqJson and type (reqJson['Price']) is not int:
+        abort (400)
     if 'Artist' in reqJson:
         foundVinyl['Artist'] = reqJson['Artist']
     if 'Title' in reqJson:
@@ -88,6 +92,16 @@ def update(id):
         foundVinyl['Price'] = reqJson['Price']
     
     return jsonify(foundVinyl)
+
+# curl -X DELETE "http://127.0.0.1:5000/vinyl/1"
+@app.route('/vinyl/<int:id>', methods=["DELETE"])
+def delete(id):
+    foundVinyl = list(filter(lambda t: t['id'] == id, vinyl))
+    if (len(foundVinyl) == 0):
+        abort (404)
+    vinyl.remove(foundVinyl[0])
+    return jsonify({"done":True})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
