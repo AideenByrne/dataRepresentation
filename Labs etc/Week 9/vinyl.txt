@@ -1,0 +1,24 @@
+vinyl = [
+    {
+        "id":1,
+        "Artist":"Sleep",
+        "Title":"Holy Mountain",
+        "Label":"Southern Lord",
+        "Price":200
+    },
+    {
+       "id":2,
+        "Artist":"High On Fire",
+        "Title":"Luminiferous",
+        "Label":"Southern Lord",
+        "Price":40
+    },
+    {
+       "id":3,
+        "Artist":"At The Gates",
+        "Title":"Slaughter of the Soul",
+        "Label":"Disfear",
+        "Price":25
+    }
+]
+nextID = 4

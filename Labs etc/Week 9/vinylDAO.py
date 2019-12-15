@@ -1,5 +1,6 @@
 import mysql.connector
-class StudentDAO:
+
+class VinylDAO:
     db=""
     def __init__(self):
         self.db = mysql.connector.connect(
@@ -11,14 +12,14 @@ class StudentDAO:
 
     def create(self, values):
         cursor = self.db.cursor()
-        sql="insert into student (name, age) values (%s,%s)"
+        sql="insert into vinyl (artist, title, label, price) values (%s,%s, %s, %s)"
         cursor.execute(sql, values)
         self.db.commit()
         return cursor.lastrowid
 
     def getAll(self):
         cursor = self.db.cursor()
-        sql="select * from student"
+        sql="select * from vinyl"
         cursor.execute(sql)
         results = cursor.fetchall()
         returnArray = []
@@ -28,7 +29,7 @@ class StudentDAO:
 
     def findByID(self, id):
         cursor = self.db.cursor()
-        sql="select * from student where id = %s"
+        sql="select * from vinyl where id = %s"
         values = (id,)
         cursor.execute(sql, values)
         result = cursor.fetchone()
@@ -36,13 +37,13 @@ class StudentDAO:
 
     def update(self, values):
         cursor = self.db.cursor()
-        sql="update student set name= %s, age=%s where id = %s"
+        sql="update vinyl set artist=%s, title=%s, label=%s, price=%s where id = %s"
         cursor.execute(sql, values)
         self.db.commit()
 
     def delete(self, id):
         cursor = self.db.cursor()
-        sql="delete from student where id = %s"
+        sql="delete from vinyl where id = %s"
         values = (id,)
         cursor.execute(sql, values)
         self.db.commit()
@@ -57,4 +58,4 @@ class StudentDAO:
                 item[colName] = value
         return item 
 
-studentDAO = StudentDAO()
+vinylDAO = VinylDAO()
